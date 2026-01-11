@@ -143,7 +143,18 @@ const Register = () => {
 
             <div className="space-y-2">
               <Label htmlFor="role">Role / Jabatan</Label>
-              <Select value={role} onValueChange={(value: 'admin' | 'guru' | 'siswa') => setRole(value)} disabled={loading}>
+              <Select 
+                value={role} 
+                onValueChange={(value: 'admin' | 'guru' | 'siswa') => {
+                  setRole(value);
+                  // Reset jurusan dan angkatan jika bukan siswa
+                  if (value !== 'siswa') {
+                    setJurusan('');
+                    setAngkatan('');
+                  }
+                }} 
+                disabled={loading}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Pilih role" />
                 </SelectTrigger>
@@ -155,35 +166,39 @@ const Register = () => {
               </Select>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="jurusan">Jurusan</Label>
-              <Select value={jurusan} onValueChange={setJurusan} disabled={loading}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Pilih jurusan" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="trkj">TRKJ - Teknik Rekayasa dan Jaringan Komputer</SelectItem>
-                  <SelectItem value="ti">TI - Teknik Informatika</SelectItem>
-                  <SelectItem value="trmm">TRMM - Teknik Rekayasa Multimedia</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            {role === 'siswa' && (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="jurusan">Jurusan</Label>
+                  <Select value={jurusan} onValueChange={setJurusan} disabled={loading}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Pilih jurusan" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="trkj">TRKJ - Teknik Rekayasa dan Jaringan Komputer</SelectItem>
+                      <SelectItem value="ti">TI - Teknik Informatika</SelectItem>
+                      <SelectItem value="trmm">TRMM - Teknik Rekayasa Multimedia</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="angkatan">Angkatan</Label>
-              <Select value={angkatan} onValueChange={setAngkatan} disabled={loading}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Pilih tahun" />
-                </SelectTrigger>
-                <SelectContent>
-                  {angkatanOptions.map((year) => (
-                    <SelectItem key={year} value={year.toString()}>
-                      {year}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+                <div className="space-y-2">
+                  <Label htmlFor="angkatan">Angkatan</Label>
+                  <Select value={angkatan} onValueChange={setAngkatan} disabled={loading}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Pilih tahun" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {angkatanOptions.map((year) => (
+                        <SelectItem key={year} value={year.toString()}>
+                          {year}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </>
+            )}
 
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? (
