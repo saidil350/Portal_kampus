@@ -1,73 +1,86 @@
-# Welcome to your Lovable project
+# 🏫 Manajemen Inventoris TIK - Portal Kampus
 
-## Project info
+Sistem Manajemen Inventoris TIK (Teknik Informatika dan Komputer) adalah platform berbasis web modern yang dirancang untuk mempermudah proses peminjaman, pelacakan, dan pengelolaan aset laboratorium seperti kunci ruangan, infokus, dan perangkat lainnya.
 
-**URL**: https://lovable.dev/projects/09e8f68d-0026-4149-94de-3f678d1fbb42
+![Versi](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-## How can I edit this code?
+## 🚀 Fitur Utama
 
-There are several ways of editing your application.
+- **Sistem Autentikasi Modern**: Login & Register dengan peran yang berbeda (Admin, Guru, Siswa).
+- **Manajemen Peminjaman Real-time**: Pengajuan peminjaman barang dengan status persetujuan yang transparan.
+- **Dashboard Statistik**: Visualisasi data inventoris dan aktivitas peminjaman menggunakan grafik interaktif.
+- **Inventoris Terpusat**: Pengelolaan data barang (kunci, infokus, dll) berdasarkan ruangan dan kondisi.
+- **Kalender Aktivitas**: Penjadwalan penggunaan ruangan dan peralatan secara visual.
+- **Ekspor Laporan**: Fitur unduh laporan dalam format **PDF** dan **Excel**.
+- **Log Aktivitas**: Pelacakan setiap perubahan dan transaksi untuk audibilitas yang lebih baik.
 
-**Use Lovable**
+## 🛠️ Stack Teknologi
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/09e8f68d-0026-4149-94de-3f678d1fbb42) and start prompting.
+Sistem ini dikembangkan menggunakan teknologi terkini:
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Frontend**: [React.js](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Database & Auth**: [Supabase](https://supabase.com/)
+- **Charts**: [Recharts](https://recharts.org/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-**Use your preferred IDE**
+## 📂 Struktur Folder
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```text
+src/
+├── components/     # Komponen UI yang dapat digunakan kembali
+├── contexts/       # Context API untuk autentikasi dan state global
+├── hooks/          # Custom react hooks
+├── lib/            # Utilitas dan konfigurasi (Supabase, dll)
+├── pages/          # Halaman utama aplikasi (Dashboard, Login, dll)
+└── types/          # Definisi tipe TypeScript
 ```
 
-**Edit a file directly in GitHub**
+## 🛠️ Persiapan Instalasi
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Pastikan Anda sudah menginstal **Node.js** di komputer Anda.
 
-**Use GitHub Codespaces**
+1. **Clone Repository**
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+   ```bash
+   git clone https://github.com/username/manajemen-inventoris-tik.git
+   cd manajemen-inventoris-tik
+   ```
 
-## What technologies are used for this project?
+2. **Instal Dependensi**
 
-This project is built with:
+   ```bash
+   npm install
+   ```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+3. **Konfigurasi Environment**
+   Buat file `.env` di root direktori dan masukkan kredensial Supabase Anda:
 
-## How can I deploy this project?
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-Simply open [Lovable](https://lovable.dev/projects/09e8f68d-0026-4149-94de-3f678d1fbb42) and click on Share -> Publish.
+4. **Jalankan Aplikasi**
+   ```bash
+   npm run dev
+   ```
 
-## Can I connect a custom domain to my Lovable project?
+## 🗄️ Setup Database (Supabase)
 
-Yes, you can!
+Skrip SQL untuk inisialisasi tabel, kebijakan (RLS), dan data awal tersedia di folder `/supabase`. Anda bisa menjalankan skrip tersebut di SQL Editor Supabase Dashboard:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. `auto-seed-all-data.sql` - Inisialisasi tabel, fungsi, dan data uji.
+2. `storage-bucket-setup.sql` - Persiapan bucket untuk penyimpanan file.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 👥 Kontributor
+
+- **[Nama Anda]** - _Project Lead / Developer_
+
+## 📜 Lisensi
+
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
