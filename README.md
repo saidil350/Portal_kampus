@@ -79,7 +79,12 @@ Skrip SQL untuk inisialisasi tabel, kebijakan (RLS), dan data awal tersedia di f
 
 ## 👥 Kontributor
 
-- **[Nama Anda]** - _Project Lead / Developer_
+| Nama                        | Peran                        |
+| :-------------------------- | :--------------------------- |
+| **Ikhsanur Rafiki**         | Ketua Tim                    |
+| **Saidil Mursal**           | Pembuat Web / Lead Developer |
+| **Muhammad Rusdi Alfarouq** | Anggota                      |
+| **Nailal Khaira**           | Anggota                      |
 
 ## 📜 Lisensi
 
