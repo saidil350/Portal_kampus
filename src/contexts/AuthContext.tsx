@@ -150,24 +150,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       // Update role if not 'siswa' (default dari trigger adalah 'siswa')
       if (role !== 'siswa') {
-        // Coba update langsung terlebih dahulu
-        const { error: roleError } = await supabase
-          .from('user_roles')
-          .update({ role: role })
-          .eq('user_id', data.user.id);
-
-        // Jika gagal karena RLS, gunakan RPC function
-        if (roleError) {
-          console.log('Direct update failed, trying RPC function...', roleError);
-          const { error: rpcError } = await supabase
-            .rpc('set_user_role', { 
-              p_user_id: data.user.id, 
-              p_role: role 
-            });
+        // Tunggu sebentar agar trigger database selesai membuat entry di user_roles
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Gunakan RPC function sebagai metode utama (SECURITY DEFINER bypass RLS)
+        // Direct update TIDAK AKAN BEKERJA karena RLS policy hanya mengizinkan admin
+        console.log('Updating role to:', role, 'for user:', data.user.id);
+        
+        const { error: rpcError } = await supabase
+          .rpc('set_user_role', { 
+            p_user_id: data.user.id, 
+            p_role: role 
+          });
+        
+        if (rpcError) {
+          console.error('Error updating role via RPC:', rpcError);
+          // Fallback: coba direct update (kemungkinan besar gagal karena RLS)
+          const { error: roleError } = await supabase
+            .from('user_roles')
+            .update({ role: role })
+            .eq('user_id', data.user.id);
           
-          if (rpcError) {
-            console.error('Error updating role via RPC:', rpcError);
+          if (roleError) {
+            console.error('Direct update also failed:', roleError);
           }
+        } else {
+          console.log('Role successfully updated to:', role);
         }
       }
     }
